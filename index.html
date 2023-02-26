@@ -16,10 +16,10 @@
       <h1 class="container my-3">Welcome to my Phone Hunter Sabbir</h1>
     </header>
     <main class="container">
-        <div class="mb-3 w-50">
-            <input type="email" class="form-control" id="search-field"
-            placeholder="search your Phone">
-            <button id="btn-search" class="btn btn-primary">Search</button>
+          <div class="input-group mb-3">
+            <input id="search-field" type="text" class="form-control" placeholder="Recipient's username" aria-
+            label="Recipient's username" aria-describedby="button-addon2">
+            <button class="btn btn-outline-secondary" type="button" id="btn-search">Button</button>
           </div>
         <!-- display search result -->
       <section>
@@ -28,6 +28,14 @@
         </div>
         <div id="no-found-message" class="mt-4 d-none">
             <h3 class="text-warning">No Phone Found. Please try a new search</h3>
+        </div>
+      </section>
+      <!-- loader -->
+      <section id="loader" class="d-none">
+        <div style="height: 400px;" class="d-flex justify-content-center align-items-center">
+          <div class="spinner-border text-dark" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
         </div>
       </section>
     </main>
