@@ -98,6 +98,7 @@ const displayPhoneDetail = phone =>{
     <p class="mt-2">Release Date: ${phone.releaseDate ? phone.releaseDate : 'No Release Date Found'}</p>
     <p>Display Size: ${phone.mainFeatures.displaySize ? phone.mainFeatures.displaySize : 'No Display Size'}</P>
     <p>Memory Size: ${phone.mainFeatures.memory ? phone.mainFeatures.memory : 'No Memory Size'}</P>
+    <p>Sensors: ${phone.mainFeatures.sensors[0]}</p>
     `
     // const phoneModalDetails = document.getElementById('phone-modal-details');
     // phoneModalDetails.innerHTML = `
