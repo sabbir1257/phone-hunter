@@ -16,7 +16,7 @@ const displayPhone = (phones, dataLimit) => {
   } else {
     showAll.classList.add("d-none");
   }
-  
+
   const noPhone = document.getElementById("no-found-message");
   // display no phone found
   if (phones.length === 0) {
@@ -30,7 +30,6 @@ const displayPhone = (phones, dataLimit) => {
     phoneDiv.classList.add("col");
     phoneDiv.innerHTML = `
         <div class="card p-4">
-        longer.
               <img src="${phone.image}" class="card-img-top" alt="..." />
               <div class="card-body">
                 <h5 class="card-title">${phone.phone_name} </h5>
@@ -38,6 +37,8 @@ const displayPhone = (phones, dataLimit) => {
                   This is a longer card with supporting text below as a natural
                   lead-in to additional content. This content is a little bit
                 </p>
+                <button onclick="loadPhoneDetails('${phone.slug}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#phoneDetailModal">Show Details</button>
+                <p></p>
               </div>
             </div>
         `;
@@ -60,6 +61,13 @@ document.getElementById("btn-search").addEventListener("click", function () {
   procrssSearch(10);
 });
 
+// search input field enter key handler
+document.getElementById('search-field').addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+        procrssSearch(10);
+    }
+});
+
 const toggleSpinner = (isLoading) => {
   const loaderSection = document.getElementById("loader");
   if (isLoading) {
@@ -73,4 +81,29 @@ document.getElementById('btn-show-all').addEventListener('click', function(){
     procrssSearch();
 })
 
-// loadPhone();
+const loadPhoneDetails = async id => {
+    const url = `https://openapi.programming-hero.com/api/phone/${id}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    displayPhoneDetail(data.data); 
+}
+
+const displayPhoneDetail = phone =>{
+    console.log(phone);
+    const modalTaitle = document.getElementById('phoneDetailModalLabel');
+    modalTaitle.innerText = phone.name;
+    const phoneModalImg = document.getElementById('phone-modal-img');
+    phoneModalImg.innerHTML = `
+    <img src="${phone.image}">
+    <p class="mt-2">Release Date: ${phone.releaseDate ? phone.releaseDate : 'No Release Date Found'}</p>
+    <p>Display Size: ${phone.mainFeatures.displaySize ? phone.mainFeatures.displaySize : 'No Display Size'}</P>
+    <p>Memory Size: ${phone.mainFeatures.memory ? phone.mainFeatures.memory : 'No Memory Size'}</P>
+    `
+    // const phoneModalDetails = document.getElementById('phone-modal-details');
+    // phoneModalDetails.innerHTML = `
+    // <p>Release Date: ${phone.releaseDate}</p>
+    // `
+}
+
+
+loadPhone('apple');
